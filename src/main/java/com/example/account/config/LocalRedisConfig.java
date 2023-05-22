@@ -7,9 +7,10 @@ import redis.embedded.RedisServer;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+
 @Configuration
 public class LocalRedisConfig {
-    @Value("${spring.redis.port}")
+    @Value("6379")
     private int redisPort;
 
     private RedisServer redisServer;
@@ -17,7 +18,9 @@ public class LocalRedisConfig {
     @PostConstruct
     public void startRedis() {
         redisServer = new RedisServer(redisPort);
+
         redisServer.start();
+
     }
 
     @PreDestroy

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 public class DeleteAccount {
@@ -16,8 +17,8 @@ public class DeleteAccount {
         private Long userId;
 
         @NotNull
-        @Min(100)
-        private Long initialBalance;
+        @Size(min= 10, max = 10)
+        private String accountNumber;
     }
 
     @Getter
@@ -28,13 +29,13 @@ public class DeleteAccount {
     public static class Response{
         private Long userId;
         private String accountNumber;
-        private LocalDateTime registeredAt;
+        private LocalDateTime unRegisteredAt;
 
         public static Response from(AccountDto accountDto){
             return Response.builder()
                     .userId(accountDto.getUserId())
                     .accountNumber(accountDto.getAccountNumber())
-                    .registeredAt(accountDto.getRegistedAt())
+                    .unRegisteredAt(accountDto.getUnregistedAt())
                     .build();
         }
     }
