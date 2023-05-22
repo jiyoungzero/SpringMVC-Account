@@ -5,20 +5,26 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-public class AccountUser extends BaseEntity{
+@MappedSuperclass
+public class BaseEntity {
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    private String name;
-
+    @CreatedDate
+    private LocalDateTime createdAt;
+    @LastModifiedBy
+    private LocalDateTime updatedAt;
 }
